@@ -43,11 +43,15 @@ class SignupWithEmail extends StatelessWidget {
               height: 1.4 * (MediaQuery.of(context).size.height / 20),
               width: 5 * (MediaQuery.of(context).size.width / 10),
               margin: EdgeInsets.only(bottom: 20),
-              child: RaisedButton(
-                elevation: 5.0,
-                color: Color(0xff2470c7),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  elevation: MaterialStateProperty.resolveWith((states) => 0.5),
+                  foregroundColor: MaterialStateProperty.resolveWith(
+                      (states) => Color(0xff2470c7)),
+                  shape: MaterialStateProperty.resolveWith(
+                    (states) => RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0)),
+                  ),
                 ),
                 onPressed: () {
                   AuthService()

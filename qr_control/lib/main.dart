@@ -1,8 +1,13 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 // Import the firebase_core plugin
 import 'package:firebase_core/firebase_core.dart';
-import 'package:qr_control/screens/signup_email.dart';
+import 'package:provider/provider.dart';
+import 'package:qr_control/models/user.dart';
+import 'package:qr_control/services/auth.dart';
+import 'package:qr_control/utilities/wrapper.dart';
 import 'package:qr_control/widgets/loading.dart';
 
 void main() {
@@ -42,9 +47,14 @@ class _AppState extends State<App> {
 
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
-          return MaterialApp(
-            home: Scaffold(body: SignupWithEmail()),
-          );
+          return MultiProvider(
+              providers: [
+                StreamProvider<ActiveUser>.value(
+                    initialData: null, value: AuthService().currentUser)
+              ],
+              child: MaterialApp(
+                home: Scaffold(body: AuthWrapper()),
+              ));
         }
 
         // Otherwise, show something whilst waiting for initialization to complete

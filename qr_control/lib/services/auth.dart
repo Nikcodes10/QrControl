@@ -27,7 +27,7 @@ class AuthService {
         return await loginWithEmailandPassword(email, password);
       }
     } catch (e) {
-      print(e);
+      print("hi");
       return null;
     }
   }
@@ -37,6 +37,16 @@ class AuthService {
       UserCredential cred = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       return cred.user;
+    } catch (e) {
+      print(e);
+      return null;
+    }
+  }
+
+  Future signOut() async {
+    try {
+      await _auth.signOut();
+      return null;
     } catch (e) {
       print(e);
       return null;
